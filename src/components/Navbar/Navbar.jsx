@@ -1,11 +1,10 @@
 import { Link } from "react-router";
-import { FaBars, FaLock } from "react-icons/fa6";
-import { IoLogoJavascript } from "react-icons/io5";
-import { FaHome, FaInfoCircle } from "react-icons/fa";
+import { FaBars } from "react-icons/fa6";
+import { FaHome, FaInfoCircle, FaLock } from "react-icons/fa";
+import logo from "../../assets/logo.png";
 
 const Navbar = () => {
-  // Temporary state
-  // Change to true later after Firebase login
+  // Change to true after Firebase authentication
   const isLoggedIn = false;
 
   return (
@@ -14,27 +13,33 @@ const Navbar = () => {
 
       {/* Main Content */}
       <div className="drawer-content">
-        <header className="sticky top-0 z-50 bg-white shadow-sm">
-          <div className="max-w-7xl mx-auto h-20 px-6 flex items-center justify-between">
+        <header className="sticky top-0 z-50 bg-white shadow-md">
+          <div className="max-w-7xl mx-auto h-20 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+
             {/* Left */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <label
                 htmlFor="nav-drawer"
-                className="cursor-pointer text-3xl hover:text-yellow-500 transition"
+                className="cursor-pointer text-2xl md:text-3xl hover:text-yellow-500 transition"
               >
                 <FaBars />
               </label>
 
-              <h2 className="text-xl font-semibold">Home</h2>
+              <h2 className="hidden sm:block text-lg md:text-xl font-semibold">
+                Home
+              </h2>
             </div>
 
-            {/* Center */}
-            <Link to="/" className="flex items-center gap-2">
-              <IoLogoJavascript className="text-5xl text-[#F7DF1E]" />
-
-              <h1 className="text-4xl font-extrabold tracking-tight">
-                Solve JS
-              </h1>
+            {/* Center Logo */}
+            <Link
+              to="/"
+              className="absolute left-1/2 -translate-x-1/2 flex items-center"
+            >
+              <img
+                src={logo}
+                alt="SolveJS"
+                className="h-10 sm:h-15 md:h-14 lg:h-20 w-auto object-contain"
+              />
             </Link>
 
             {/* Right */}
@@ -48,15 +53,17 @@ const Navbar = () => {
                   <img
                     src="https://i.pravatar.cc/100"
                     alt="User"
-                    className="w-11 h-11 rounded-full border-2 border-yellow-400"
+                    className="w-10 h-10 rounded-full border-2 border-yellow-400"
                   />
 
-                  <span className="font-semibold">Auion</span>
+                  <span className="hidden md:block font-semibold">
+                    Auion
+                  </span>
                 </div>
 
                 <ul
                   tabIndex={0}
-                  className="dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow"
+                  className="dropdown-content menu bg-base-100 rounded-xl mt-3 w-56 p-2 shadow-lg"
                 >
                   <li>
                     <Link to="/profile">Profile</Link>
@@ -74,7 +81,7 @@ const Navbar = () => {
             ) : (
               <Link
                 to="/register"
-                className="btn bg-[#F7DF1E] hover:bg-yellow-400 text-black border-none"
+                className="btn bg-[#F7DF1E] hover:bg-yellow-400 text-black border-none rounded-xl px-5"
               >
                 Sign Up
               </Link>
@@ -91,8 +98,16 @@ const Navbar = () => {
           className="drawer-overlay"
         ></label>
 
-        <ul className="menu p-6 w-72 min-h-full bg-white text-base-content">
-          <h2 className="text-2xl font-bold mb-6">Menu</h2>
+        <ul className="menu p-6 w-72 min-h-full bg-white">
+
+          {/* Drawer Logo */}
+          <div className="flex justify-center mb-6">
+            <img
+              src={logo}
+              alt="SolveJS"
+              className="h-16 w-auto"
+            />
+          </div>
 
           <li>
             <Link to="/">

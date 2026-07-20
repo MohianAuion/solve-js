@@ -34,26 +34,45 @@ const stats = [
 
 const HeroStats = () => {
   return (
-    <section className="mt-16">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+    <section className="mt-12 sm:mt-16 lg:mt-20">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+
         {stats.map((item) => (
           <div
             key={item.id}
-            className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
+            className="bg-white rounded-2xl border border-gray-200 shadow-sm
+            p-5 sm:p-6 lg:p-8
+            flex flex-col items-center lg:items-start
+            text-center lg:text-left
+            hover:shadow-xl hover:-translate-y-2
+            transition-all duration-300"
           >
-            <div className="w-14 h-14 rounded-full bg-yellow-100 text-yellow-500 flex items-center justify-center text-2xl mb-4">
+            <div
+              className="
+              w-12 h-12
+              sm:w-14 sm:h-14
+              lg:w-16 lg:h-16
+              rounded-full
+              bg-yellow-100
+              text-yellow-500
+              flex items-center justify-center
+              text-xl sm:text-2xl lg:text-3xl
+              mb-4
+            "
+            >
               {item.icon}
             </div>
 
-            <h2 className="text-3xl font-bold">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
               {item.number}
             </h2>
 
-            <p className="mt-2 text-gray-500">
+            <p className="mt-2 text-sm sm:text-base text-gray-500">
               {item.title}
             </p>
           </div>
         ))}
+
       </div>
     </section>
   );

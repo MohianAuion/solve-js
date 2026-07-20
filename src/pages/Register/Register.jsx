@@ -20,7 +20,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] =useState("");
+  const [error, setError] = useState("");
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -66,129 +66,165 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFF9E8] flex items-center justify-center px-4 py-10">
-      <div className="max-w-6xl w-full bg-white rounded-3xl shadow-xl overflow-hidden grid lg:grid-cols-2">
+    <div className="min-h-screen bg-[#FFF9E8] flex items-center justify-center px-4 py-6 sm:py-10">
+      <div className="max-w-6xl w-full bg-white rounded-3xl shadow-xl overflow-hidden grid grid-cols-1 lg:grid-cols-2">
 
         {/* Left Side */}
-        <div className="hidden lg:flex flex-col justify-center bg-yellow-400 p-12 text-black">
+        <div className="flex flex-col justify-center items-center bg-yellow-400 text-black p-6 sm:p-8 lg:p-12">
+
           <img
             src={registerImg}
             alt="Register"
-            className="w-72 mx-auto mb-10"
+            className="w-48 sm:w-64 lg:w-72 mb-6 lg:mb-10"
           />
 
-          <h2 className="text-5xl font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center lg:text-left mb-4 lg:mb-6">
             Welcome to
             <br />
             Solve JS
           </h2>
 
-          <p className="text-xl leading-9">
+          <p className="text-base sm:text-lg lg:text-xl leading-7 lg:leading-9 text-center lg:text-left">
             Learn JavaScript by solving real-world coding problems.
             <br />
             Create your account and unlock all practice topics.
           </p>
+
         </div>
 
         {/* Right Side */}
-        <div className="p-10 lg:p-14">
+        <div className="p-6 sm:p-8 lg:p-14">
 
-          <h2 className="text-5xl font-bold">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
             Create Account
           </h2>
 
-          <p className="text-gray-500 mt-3 mb-10">
+          <p className="text-gray-500 mt-3 mb-8 text-sm sm:text-base">
             Start your JavaScript journey today.
           </p>
 
-          <form onSubmit={handleRegister} className="space-y-5">
+          <form
+            onSubmit={handleRegister}
+            className="space-y-5"
+          >
 
             {/* Name */}
             <div>
-              <label className="font-semibold">Full Name</label>
+
+              <label className="font-semibold">
+                Full Name
+              </label>
 
               <div className="relative mt-2">
-                <FaUser className="absolute left-4 top-4 text-gray-400" />
+
+                <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
 
                 <input
                   type="text"
                   name="name"
                   required
-                  placeholder="Enter your name"
-                  className="input input-bordered w-full pl-12"
+                  placeholder="Enter your full name"
+                  className="input input-bordered w-full h-12 sm:h-14 pl-12"
                 />
+
               </div>
+
             </div>
 
-            {/* Photo */}
+            {/* Photo URL */}
             <div>
-              <label className="font-semibold">Photo URL</label>
+
+              <label className="font-semibold">
+                Photo URL
+              </label>
 
               <div className="relative mt-2">
-                <FaImage className="absolute left-4 top-4 text-gray-400" />
+
+                <FaImage className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
 
                 <input
                   type="text"
                   name="photo"
-                  placeholder="Paste photo URL"
-                  className="input input-bordered w-full pl-12"
+                  placeholder="Paste your photo URL"
+                  className="input input-bordered w-full h-12 sm:h-14 pl-12"
                 />
+
               </div>
+
             </div>
 
             {/* Email */}
             <div>
-              <label className="font-semibold">Email</label>
+
+              <label className="font-semibold">
+                Email
+              </label>
 
               <div className="relative mt-2">
-                <FaEnvelope className="absolute left-4 top-4 text-gray-400" />
+
+                <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
 
                 <input
                   type="email"
                   name="email"
                   required
                   placeholder="Enter your email"
-                  className="input input-bordered w-full pl-12"
+                  className="input input-bordered w-full h-12 sm:h-14 pl-12"
                 />
+
               </div>
+
             </div>
 
             {/* Password */}
             <div>
-              <label className="font-semibold">Password</label>
+
+              <label className="font-semibold">
+                Password
+              </label>
 
               <div className="relative mt-2">
-                <FaLock className="absolute left-4 top-4 text-gray-400" />
+
+                <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
 
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
                   required
                   placeholder="Enter password"
-                  className="input input-bordered w-full pl-12 pr-12"
+                  className="input input-bordered w-full h-12 sm:h-14 pl-12 pr-12"
                 />
 
                 <button
                   type="button"
-                  className="absolute right-4 top-4"
                   onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2"
                 >
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  {showPassword ? (
+                    <FaEyeSlash />
+                  ) : (
+                    <FaEye />
+                  )}
                 </button>
+
               </div>
+
             </div>
 
             {/* Terms */}
-            <label className="flex items-center gap-3">
+            <label className="flex items-start gap-3 cursor-pointer">
               <input
                 type="checkbox"
                 name="terms"
-                className="checkbox checkbox-warning"
+                className="checkbox checkbox-warning mt-1"
               />
-              <span>I agree to the Terms & Conditions</span>
+
+              <span className="text-sm sm:text-base">
+                I agree to the Terms & Conditions
+              </span>
             </label>
 
-            {/* Error */}
+                        {/* Error Message */}
             {error && (
               <p className="text-red-500 text-sm">
                 {error}
@@ -198,27 +234,32 @@ const Register = () => {
             {/* Register Button */}
             <button
               type="submit"
-              className="btn btn-warning w-full"
+              className="btn btn-warning w-full h-12 sm:h-14 text-base"
             >
               Create Account
             </button>
+
           </form>
 
-          <div className="divider my-8">OR</div>
+          <div className="divider my-6 sm:my-8">
+            OR
+          </div>
 
+          {/* Google Register */}
           <button
             onClick={handleGoogleRegister}
-            className="btn btn-outline w-full"
+            className="btn btn-outline w-full h-12 sm:h-14 text-base"
           >
             <FaGoogle />
             Continue with Google
           </button>
 
-          <p className="text-center mt-8">
+          {/* Login Link */}
+          <p className="text-center mt-6 sm:mt-8 text-sm sm:text-base">
             Already have an account?{" "}
             <Link
               to="/login"
-              className="text-yellow-500 font-bold"
+              className="text-yellow-500 font-bold hover:underline"
             >
               Login
             </Link>

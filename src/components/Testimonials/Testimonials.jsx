@@ -7,7 +7,7 @@ const testimonials = [
     role: "Frontend Developer",
     image: "https://i.pravatar.cc/150?img=12",
     review:
-      "Solve JS made JavaScript so much easier to understand. The roadmap and coding problems are amazing!",
+      "SolveJS made JavaScript so much easier to understand. The roadmap and coding problems are amazing!",
   },
   {
     id: 2,
@@ -29,57 +29,61 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-16 md:py-20 lg:py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
         {/* Heading */}
-        <div className="text-center mb-16">
-          <span className="text-yellow-500 uppercase font-semibold tracking-widest">
+        <div className="text-center mb-12 lg:mb-16">
+          <span className="text-yellow-500 uppercase font-semibold tracking-widest text-sm md:text-base">
             Testimonials
           </span>
 
-          <h2 className="text-5xl font-bold mt-4">
+          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold">
             What Our Learners Say
           </h2>
 
-          <p className="mt-5 max-w-2xl mx-auto text-gray-500">
-            Thousands of learners improve their JavaScript skills with Solve JS.
+          <p className="mt-4 max-w-2xl mx-auto text-gray-500 text-sm sm:text-base lg:text-lg leading-7">
+            Thousands of learners improve their JavaScript skills with SolveJS.
           </p>
         </div>
 
         {/* Cards */}
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
 
           {testimonials.map((item) => (
             <div
               key={item.id}
-              className="bg-[#FFFDF5] rounded-2xl border border-gray-200 p-8 hover:shadow-xl hover:-translate-y-2 transition duration-300"
+              className="group relative bg-[#FFFDF5] rounded-2xl border border-gray-200 p-5 sm:p-6 lg:p-8 flex flex-col h-full overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
             >
-              <div className="flex text-yellow-400 mb-5">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
+              {/* Hover Line */}
+              <div className="absolute top-0 left-0 h-1 w-0 bg-yellow-400 group-hover:w-full transition-all duration-300"></div>
+
+              {/* Stars */}
+              <div className="flex gap-1 text-yellow-400 text-sm sm:text-base mb-4">
+                {[...Array(5)].map((_, index) => (
+                  <FaStar key={index} />
+                ))}
               </div>
 
-              <p className="text-gray-600 leading-8 italic">
+              {/* Review */}
+              <p className="text-gray-600 italic text-sm sm:text-base leading-6 sm:leading-7 flex-grow">
                 "{item.review}"
               </p>
 
-              <div className="flex items-center gap-4 mt-8">
+              {/* User */}
+              <div className="flex items-center gap-3 sm:gap-4 mt-6">
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-16 h-16 rounded-full object-cover"
+                  className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full object-cover border-2 border-yellow-300 transition-transform duration-300 group-hover:scale-110"
                 />
 
                 <div>
-                  <h4 className="font-bold text-lg">
+                  <h4 className="font-bold text-base sm:text-lg">
                     {item.name}
                   </h4>
 
-                  <p className="text-gray-500">
+                  <p className="text-gray-500 text-sm">
                     {item.role}
                   </p>
                 </div>
@@ -88,6 +92,7 @@ const Testimonials = () => {
           ))}
 
         </div>
+
       </div>
     </section>
   );
