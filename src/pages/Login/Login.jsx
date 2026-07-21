@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthProvider";
 
 import {
@@ -13,9 +13,17 @@ import {
 import loginImg from "../../assets/login.png";
 
 const Login = () => {
-  const { signInUser, googleLogin } = useContext(AuthContext);
+  const {
+  signInUser,
+  googleLogin,
+  resetPassword,
+} = useContext(AuthContext);
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Redirect user to the page they wanted before login
+  const from = location.state?.from?.pathname || "/topics";
 
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
@@ -33,7 +41,7 @@ const Login = () => {
     signInUser(email, password)
       .then(() => {
         form.reset();
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         setError(err.message);
@@ -43,46 +51,64 @@ const Login = () => {
   const handleGoogleLogin = () => {
     googleLogin()
       .then(() => {
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         setError(err.message);
       });
   };
 
+  const handleForgotPassword = () => {
+  const email = document.querySelector(
+    'input[name="email"]'
+  ).value;
+
+  if (!email) {
+    setError("Please enter your email first.");
+    return;
+  }
+
+  resetPassword(email)
+    .then(() => {
+      alert("Password reset email sent successfully.");
+    })
+    .catch((error) => {
+      setError(error.message);
+    });
+};
+
   return (
     <div className="min-h-screen bg-[#FFF9E8] flex items-center justify-center px-4 py-6 sm:py-10">
-      <div className="max-w-6xl w-full bg-white rounded-3xl shadow-xl overflow-hidden grid grid-cols-1 lg:grid-cols-2">
+      <div className="max-w-6xl w-full bg-white rounded-3xl overflow-hidden shadow-xl grid grid-cols-1 lg:grid-cols-2">
 
-        {/* Left Side */}
-        <div className="flex flex-col justify-center items-center bg-gradient-to-br from-yellow-400 to-yellow-500 text-black p-6 sm:p-8 lg:p-12">
+        {/* Left Side (Hidden on Mobile) */}
+        <div className="hidden lg:flex bg-gradient-to-br from-yellow-400 to-yellow-500 flex-col justify-center items-center text-black p-12">
 
           <img
             src={loginImg}
             alt="Login"
-            className="w-48 sm:w-64 lg:w-72 mb-6 lg:mb-10"
+            className="w-80 mb-10"
           />
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center lg:text-left mb-4 lg:mb-6">
+          <h2 className="text-5xl font-bold mb-6 text-center">
             Welcome Back
           </h2>
 
-          <p className="text-base sm:text-lg lg:text-xl leading-7 lg:leading-9 text-center lg:text-left">
-            Continue your JavaScript journey.
-            <br />
-            Solve coding challenges and improve your skills.
+          <p className="text-xl text-center leading-9 max-w-md">
+            Continue your JavaScript journey by solving coding challenges
+            and improving your problem-solving skills.
           </p>
 
         </div>
 
         {/* Right Side */}
-        <div className="p-6 sm:p-8 lg:p-14">
+        <div className="p-6 sm:p-10 lg:p-14">
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
             Login
           </h2>
 
-          <p className="text-gray-500 mt-3 mb-8 text-sm sm:text-base">
+          <p className="text-gray-500 mt-3 mb-8 lg:mb-10 text-sm sm:text-base">
             Welcome back to Solve JS.
           </p>
 
@@ -93,23 +119,25 @@ const Login = () => {
 
             {/* Email */}
             <div>
+
               <label className="font-semibold">
                 Email
               </label>
 
               <div className="relative mt-2">
 
-                <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                <FaEnvelope className="absolute left-4 top-4 text-gray-400" />
 
                 <input
                   type="email"
                   name="email"
                   required
                   placeholder="Enter your email"
-                  className="input input-bordered w-full h-12 sm:h-14 pl-12"
+                  className="input input-bordered w-full pl-12"
                 />
 
               </div>
+
             </div>
 
             {/* Password */}
@@ -121,41 +149,39 @@ const Login = () => {
 
               <div className="relative mt-2">
 
-                <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                <FaLock className="absolute left-4 top-4 text-gray-400" />
 
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
                   required
-                  placeholder="Enter password"
-                  className="input input-bordered w-full h-12 sm:h-14 pl-12 pr-12"
+                  placeholder="Enter your password"
+                  className="input input-bordered w-full pl-12 pr-12"
                 />
 
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2"
+                  className="absolute right-4 top-4"
                 >
-                  {showPassword ? (
-                    <FaEyeSlash />
-                  ) : (
-                    <FaEye />
-                  )}
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
 
               </div>
             </div>
-
+                        {/* Forgot Password */}
             <div className="text-right">
               <button
-                type="button"
-                className="text-yellow-500 hover:underline text-sm sm:text-base"
-              >
-                Forgot Password?
-              </button>
+  type="button"
+  onClick={handleForgotPassword}
+  className="text-yellow-500 hover:underline"
+>
+  Forgot Password?
+</button>
             </div>
 
-                        {error && (
+            {/* Error Message */}
+            {error && (
               <p className="text-red-500 text-sm">
                 {error}
               </p>
@@ -164,21 +190,19 @@ const Login = () => {
             {/* Login Button */}
             <button
               type="submit"
-              className="btn btn-warning w-full h-12 sm:h-14 text-base"
+              className="btn btn-warning w-full text-black text-sm sm:text-base"
             >
               Login
             </button>
 
           </form>
 
-          <div className="divider my-6 sm:my-8">
-            OR
-          </div>
+          <div className="divider my-6 sm:my-8">OR</div>
 
           {/* Google Login */}
           <button
             onClick={handleGoogleLogin}
-            className="btn btn-outline w-full h-12 sm:h-14 text-base"
+            className="btn btn-outline w-full text-sm sm:text-base"
           >
             <FaGoogle />
             Continue with Google

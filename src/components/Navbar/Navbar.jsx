@@ -1,49 +1,64 @@
+import { useContext } from "react";
 import { Link } from "react-router";
-import { FaBars } from "react-icons/fa6";
-import { FaHome, FaInfoCircle, FaLock } from "react-icons/fa";
+
+import { AuthContext } from "../../context/AuthProvider";
+
+import { FaBars, FaLock } from "react-icons/fa6";
+import { FaHome, FaInfoCircle } from "react-icons/fa";
+
 import logo from "../../assets/logo.png";
 
 const Navbar = () => {
-  // Change to true after Firebase authentication
-  const isLoggedIn = false;
+  const { user, logout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logout().catch((error) => console.log(error));
+  };
 
   return (
     <div className="drawer">
-      <input id="nav-drawer" type="checkbox" className="drawer-toggle" />
+      <input
+        id="nav-drawer"
+        type="checkbox"
+        className="drawer-toggle"
+      />
 
-      {/* Main Content */}
       <div className="drawer-content">
-        <header className="sticky top-0 z-50 bg-white shadow-md">
-          <div className="max-w-7xl mx-auto h-20 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <header className="sticky top-0 z-50 bg-white shadow-sm">
+          <div className="max-w-7xl mx-auto h-20 px-4 sm:px-6 flex items-center justify-between">
 
             {/* Left */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <label
                 htmlFor="nav-drawer"
-                className="cursor-pointer text-2xl md:text-3xl hover:text-yellow-500 transition"
+                className="cursor-pointer text-2xl hover:text-yellow-500"
               >
                 <FaBars />
               </label>
 
-              <h2 className="hidden sm:block text-lg md:text-xl font-semibold">
+              <h2 className="hidden sm:block text-lg font-semibold">
                 Home
               </h2>
             </div>
 
-            {/* Center Logo */}
+            {/* Logo */}
             <Link
               to="/"
-              className="absolute left-1/2 -translate-x-1/2 flex items-center"
+              className="flex items-center gap-2"
             >
               <img
                 src={logo}
-                alt="SolveJS"
-                className="h-10 sm:h-15 md:h-14 lg:h-20 w-auto object-contain"
+                alt="Solve JS"
+                className="w-12 h-12 object-contain"
               />
+
+              <h1 className="hidden sm:block text-3xl font-extrabold">
+                Solve JS
+              </h1>
             </Link>
 
             {/* Right */}
-            {isLoggedIn ? (
+            {user ? (
               <div className="dropdown dropdown-end">
                 <div
                   tabIndex={0}
@@ -51,37 +66,42 @@ const Navbar = () => {
                   className="flex items-center gap-3 cursor-pointer"
                 >
                   <img
-                    src="https://i.pravatar.cc/100"
+                    src={
+                      user?.photoURL ||
+                      "https://ui-avatars.com/api/?name=User"
+                    }
                     alt="User"
-                    className="w-10 h-10 rounded-full border-2 border-yellow-400"
+                    className="w-11 h-11 rounded-full border-2 border-yellow-400 object-cover"
                   />
 
                   <span className="hidden md:block font-semibold">
-                    Auion
+                    {user?.displayName || "User"}
                   </span>
                 </div>
 
                 <ul
                   tabIndex={0}
-                  className="dropdown-content menu bg-base-100 rounded-xl mt-3 w-56 p-2 shadow-lg"
+                  className="dropdown-content menu bg-base-100 rounded-box w-56 mt-3 p-2 shadow"
                 >
                   <li>
                     <Link to="/profile">Profile</Link>
                   </li>
 
                   <li>
-                    <Link to="/dashboard">Dashboard</Link>
+                    <Link to="/topics">Topics</Link>
                   </li>
 
                   <li>
-                    <button>Sign Out</button>
+                    <button onClick={handleLogout}>
+                      Sign Out
+                    </button>
                   </li>
                 </ul>
               </div>
             ) : (
               <Link
                 to="/register"
-                className="btn bg-[#F7DF1E] hover:bg-yellow-400 text-black border-none rounded-xl px-5"
+                className="btn btn-warning"
               >
                 Sign Up
               </Link>
@@ -91,23 +111,16 @@ const Navbar = () => {
       </div>
 
       {/* Drawer */}
-      <div className="drawer-side z-50">
+      <div className="drawer-side">
         <label
           htmlFor="nav-drawer"
-          aria-label="Close sidebar"
           className="drawer-overlay"
         ></label>
 
         <ul className="menu p-6 w-72 min-h-full bg-white">
-
-          {/* Drawer Logo */}
-          <div className="flex justify-center mb-6">
-            <img
-              src={logo}
-              alt="SolveJS"
-              className="h-16 w-auto"
-            />
-          </div>
+          <h2 className="text-2xl font-bold mb-6">
+            Menu
+          </h2>
 
           <li>
             <Link to="/">
@@ -127,20 +140,22 @@ const Navbar = () => {
 
           <li>
             <Link
-              to={isLoggedIn ? "/topics" : "/register"}
-              className={!isLoggedIn ? "text-gray-500" : ""}
+              to={user ? "/topics" : "/register"}
+              className={!user ? "text-gray-500" : ""}
             >
               <FaLock />
-              {isLoggedIn ? "Topics" : "Topics (Locked)"}
+              {user ? "Topics" : "Topics (Locked)"}
             </Link>
           </li>
 
-          {isLoggedIn && (
+          {user && (
             <>
               <div className="divider"></div>
 
               <li>
-                <button>Sign Out</button>
+                <button onClick={handleLogout}>
+                  Sign Out
+                </button>
               </li>
             </>
           )}

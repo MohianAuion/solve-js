@@ -4,6 +4,8 @@ import {
   getAuth,
   GoogleAuthProvider,
   onAuthStateChanged,
+  reload,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -21,56 +23,66 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Register with Email & Password
+  // Register
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  // Login with Email & Password
-  const loginUser = (email, password) => {
+  // Login
+  const signInUser = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  // Login with Google
-  const googleSignIn = () => {
+  // Google Login
+  const googleLogin = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
-  // Update User Profile
-  const updateUser = (name, photo) => {
-    return updateProfile(auth.currentUser, {
+  // Update Profile
+  const updateUser = async (name, photo) => {
+    await updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
     });
+
+    await reload(auth.currentUser);
+
+    setUser({ ...auth.currentUser });
   };
 
   // Logout
-  const logoutUser = () => {
+  const logout = () => {
     setLoading(true);
     return signOut(auth);
   };
 
-  // Observe Authentication State
+  // Reset Password
+  const resetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
+  };
+
+  // Observe User
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
     });
 
-    return () => unsubscribe();
+    return unsubscribe;
   }, []);
 
   const authInfo = {
     user,
     loading,
     createUser,
-    loginUser,
-    googleSignIn,
-    logoutUser,
+    signInUser,
+    googleLogin,
     updateUser,
+    logout,
+    resetPassword,
   };
 
   return (
