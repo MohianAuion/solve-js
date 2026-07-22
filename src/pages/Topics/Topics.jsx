@@ -19,10 +19,10 @@ const Topics = () => {
             Build a strong JavaScript foundation by learning one topic at a
             time. Every topic includes{" "}
             <span className="font-semibold text-black">
-              Basic Theory,
+              Basics,
             </span>{" "}
             <span className="font-semibold text-black">
-              Interview Questions,
+              ?QnA,
             </span>{" "}
             and{" "}
             <span className="font-semibold text-black">
@@ -33,7 +33,7 @@ const Topics = () => {
         </div>
 
         {/* Topic Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-4 gap-6">
           {topics.map((topic) => (
             <TopicCard
               key={topic.id}

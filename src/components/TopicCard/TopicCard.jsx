@@ -28,27 +28,31 @@ const TopicCard = ({ topic }) => {
 
       {/* Buttons */}
       <div className="border-t border-gray-200 p-6 space-y-3">
-        <Link
-          to={`/topics/${topic.slug}/theory`}
-          className="btn btn-info w-full"
-        >
-          📘 Basic Theory
-        </Link>
 
-        <Link
-          to={`/topics/${topic.slug}/questions`}
-          className="btn btn-warning w-full"
-        >
-          📝 Interview Questions
-        </Link>
+  <div className="flex gap-3">
+    <Link
+      to={`/topics/${topic.slug}/theory`}
+      className="btn w-full bg-[#F7DF1E] flex-1 font-semibold"
+    >
+      📘 Basics
+    </Link>
 
-        <Link
-          to={`/topics/${topic.slug}/problem-solving`}
-          className="btn btn-success w-full"
-        >
-          💻 Problem Solving
-        </Link>
-      </div>
+    <Link
+  to={`/topics/${topic.slug}/questions`}
+  className="text-sm border border-gray-400 rounded-md flex items-center justify-center w-full flex-1 font-bold"
+>
+  📝 QnA?
+</Link>
+  </div>
+
+  <Link
+    to={`/topics/${topic.slug}/problem-solving`}
+    className="btn bg-black text-white w-full"
+  >
+    💻 Problem Solving
+  </Link>
+
+</div>
     </div>
   );
 };

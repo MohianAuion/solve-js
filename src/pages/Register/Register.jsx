@@ -9,7 +9,6 @@ import {
   FaUser,
   FaEnvelope,
   FaLock,
-  FaImage,
 } from "react-icons/fa";
 
 const Register = () => {
@@ -32,7 +31,6 @@ const Register = () => {
     const form = e.target;
 
     const name = form.name.value.trim();
-    const photo = form.photo.value.trim();
     const email = form.email.value.trim();
     const password = form.password.value;
     const confirmPassword = form.confirmPassword.value;
@@ -41,11 +39,6 @@ const Register = () => {
     // Validation
     if (!name) {
       setError("Username is required.");
-      return;
-    }
-
-    if (!photo) {
-      setError("Photo URL is required.");
       return;
     }
 
@@ -66,7 +59,7 @@ const Register = () => {
 
     createUser(email, password)
       .then(() => {
-        return updateUser(name, photo);
+        return updateUser(name);
       })
       .then(() => {
         form.reset();
@@ -125,26 +118,8 @@ const Register = () => {
             </div>
           </div>
 
-          {/* Photo URL */}
-          <div>
-            <label className="font-semibold text-gray-700">
-              Photo URL
-            </label>
-
-            <div className="relative mt-2">
-              <FaImage className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-
-              <input
-                type="url"
-                name="photo"
-                placeholder="https://example.com/photo.jpg"
-                required
-                className="input input-bordered w-full h-12 pl-12 rounded-xl"
-              />
-            </div>
-          </div>
-
-          {/* Email */}
+         
+{/* Email */}
           <div>
             <label className="font-semibold text-gray-700">
               Email Address

@@ -1,13 +1,17 @@
+import { useContext } from "react";
 import { Link } from "react-router";
 import { FaArrowRight, FaBookOpen } from "react-icons/fa6";
+import { AuthContext } from "../../context/AuthProvider";
 
 const HeroButtons = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 w-full">
 
-      {/* Start Practicing */}
+      {/* Get Started */}
       <Link
-        to="/register"
+        to={user ? "/topics" : "/register"}
         className="btn bg-[#F7DF1E] hover:bg-yellow-400 text-black border-none rounded-xl
         w-full sm:w-auto
         px-6 sm:px-8
@@ -18,11 +22,10 @@ const HeroButtons = () => {
         transition-all duration-300
         hover:scale-105"
       >
-        Start Practicing
-        <FaArrowRight />
+        {user ? "Start Learning" : "Get Started"}
       </Link>
 
-      {/* Explore Topics */}
+      {/* Docs */}
       <Link
         to="/about"
         className="btn btn-outline border-2 border-gray-300
@@ -38,7 +41,8 @@ const HeroButtons = () => {
         hover:scale-105"
       >
         <FaBookOpen />
-        Explore Topics
+        Docs
+        <FaArrowRight />
       </Link>
 
     </div>

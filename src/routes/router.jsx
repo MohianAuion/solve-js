@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 
 import Root from "../layouts/Root";
 import Home from "../pages/Home/Home";
+import About from "../pages/About/About";
 import Register from "../pages/Register/Register";
 import Login from "../pages/Login/Login";
 import Topics from "../pages/Topics/Topics";
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+      },
+      {
+        path: "about",
+        Component: About,
       },
       {
         path: "register",
@@ -48,29 +53,29 @@ const router = createBrowserRouter([
         ),
       },
       {
-  path: "topics/:topic/questions",
-  element: (
-    <PrivateRoute>
-      <InterviewQuestions />
-    </PrivateRoute>
-  ),
-},
-{
-  path: "topics/:topic/problem-solving",
-  element: (
-    <PrivateRoute>
-      <ProblemSolving />
-    </PrivateRoute>
-  ),
-},
-{
-  path: "problem/:topic/:id",
-  element: (
-    <PrivateRoute>
-      <ProblemDetails />
-    </PrivateRoute>
-  ),
-},
+        path: "topics/:topic/questions",
+        element: (
+          <PrivateRoute>
+            <InterviewQuestions />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "topics/:topic/problem-solving",
+        element: (
+          <PrivateRoute>
+            <ProblemSolving />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "problem/:topic/:id",
+        element: (
+          <PrivateRoute>
+            <ProblemDetails />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 ]);

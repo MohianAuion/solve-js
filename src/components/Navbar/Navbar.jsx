@@ -1,28 +1,41 @@
 import { useContext } from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 import { AuthContext } from "../../context/AuthProvider";
 
 import { FaBars, FaLock } from "react-icons/fa6";
-import { FaHome, FaInfoCircle } from "react-icons/fa";
-
-import logo from "../../assets/logo.png";
+import { FaHome, FaInfoCircle, FaUnlock } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
+  const location = useLocation();
 
   const handleLogout = () => {
     logout().catch((error) => console.log(error));
   };
 
+  const getPageTitle = () => {
+    const path = location.pathname;
+
+    if (path === "/") return "Home";
+    if (path === "/about") return "About";
+    if (path === "/topics") return "Topics";
+    if (path === "/register") return "Register";
+    if (path === "/login") return "Login";
+
+    if (path.includes("/theory")) return "Theory";
+    if (path.includes("/questions")) return "Interview Questions";
+    if (path.includes("/problem-solving")) return "Problem Solving";
+    if (path.includes("/problem/")) return "Problem Details";
+
+    return "SolveJS";
+  };
+
   return (
     <div className="drawer">
-      <input
-        id="nav-drawer"
-        type="checkbox"
-        className="drawer-toggle"
-      />
+      <input id="nav-drawer" type="checkbox" className="drawer-toggle" />
 
+      {/* Main Content */}
       <div className="drawer-content">
         <header className="sticky top-0 z-50 bg-white shadow-sm">
           <div className="max-w-7xl mx-auto h-20 px-4 sm:px-6 flex items-center justify-between">
@@ -31,29 +44,21 @@ const Navbar = () => {
             <div className="flex items-center gap-3">
               <label
                 htmlFor="nav-drawer"
-                className="cursor-pointer text-2xl hover:text-yellow-500"
+                className="cursor-pointer text-2xl hover:text-yellow-500 transition"
               >
                 <FaBars />
               </label>
 
-              <h2 className="hidden sm:block text-lg font-semibold">
-                Home
+              {/* Dynamic Page Title */}
+              <h2 className="hidden sm:block text-xl font-extrabold text-red-600">
+                {getPageTitle()}
               </h2>
             </div>
 
             {/* Logo */}
-            <Link
-              to="/"
-              className="flex items-center gap-2"
-            >
-              <img
-                src={logo}
-                alt="Solve JS"
-                className="w-12 h-12 object-contain"
-              />
-
-              <h1 className="hidden sm:block text-3xl font-extrabold">
-                Solve JS
+            <Link to="/" className="flex items-center gap-2">
+              <h1 className="text-3xl font-extrabold">
+                Solve<span className="text-yellow-400">JS</span>?
               </h1>
             </Link>
 
@@ -84,25 +89,16 @@ const Navbar = () => {
                   className="dropdown-content menu bg-base-100 rounded-box w-56 mt-3 p-2 shadow"
                 >
                   <li>
-                    <Link to="/profile">Profile</Link>
-                  </li>
-
-                  <li>
                     <Link to="/topics">Topics</Link>
                   </li>
 
                   <li>
-                    <button onClick={handleLogout}>
-                      Sign Out
-                    </button>
+                    <button onClick={handleLogout}>Sign Out</button>
                   </li>
                 </ul>
               </div>
             ) : (
-              <Link
-                to="/register"
-                className="btn btn-warning"
-              >
+              <Link to="/register" className="btn btn-warning">
                 Sign Up
               </Link>
             )}
@@ -112,15 +108,10 @@ const Navbar = () => {
 
       {/* Drawer */}
       <div className="drawer-side">
-        <label
-          htmlFor="nav-drawer"
-          className="drawer-overlay"
-        ></label>
+        <label htmlFor="nav-drawer" className="drawer-overlay"></label>
 
         <ul className="menu p-6 w-72 min-h-full bg-white">
-          <h2 className="text-2xl font-bold mb-6">
-            Menu
-          </h2>
+          <h2 className="text-2xl font-bold mb-6">Menu</h2>
 
           <li>
             <Link to="/">
@@ -143,7 +134,7 @@ const Navbar = () => {
               to={user ? "/topics" : "/register"}
               className={!user ? "text-gray-500" : ""}
             >
-              <FaLock />
+              {user ? <FaUnlock /> : <FaLock />}
               {user ? "Topics" : "Topics (Locked)"}
             </Link>
           </li>

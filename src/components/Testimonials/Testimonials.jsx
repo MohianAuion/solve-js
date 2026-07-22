@@ -29,70 +29,74 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="py-16 md:py-20 lg:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <section className="py-20 bg-gradient-to-b from-white to-[#FFF9E8]">
+      <div className="max-w-7xl mx-auto px-5">
 
         {/* Heading */}
-        <div className="text-center mb-12 lg:mb-16">
-          <span className="text-yellow-500 uppercase font-semibold tracking-widest text-sm md:text-base">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <p className="uppercase tracking-[4px] text-yellow-500 font-bold text-sm">
             Testimonials
-          </span>
+          </p>
 
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold">
-            What Our Learners Say
+          <h2 className="text-4xl lg:text-5xl font-bold mt-3">
+            Loved by JavaScript Learners
           </h2>
 
-          <p className="mt-4 max-w-2xl mx-auto text-gray-500 text-sm sm:text-base lg:text-lg leading-7">
-            Thousands of learners improve their JavaScript skills with SolveJS.
+          <p className="mt-5 text-gray-600 leading-8">
+            Thousands of students improve their JavaScript skills every day
+            with SolveJS.
           </p>
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
 
           {testimonials.map((item) => (
             <div
               key={item.id}
-              className="group relative bg-[#FFFDF5] rounded-2xl border border-gray-200 p-5 sm:p-6 lg:p-8 flex flex-col h-full overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+              className="relative bg-white rounded-3xl p-8 shadow-lg border border-yellow-100 hover:shadow-2xl hover:-translate-y-2 transition duration-300"
             >
-              {/* Hover Line */}
-              <div className="absolute top-0 left-0 h-1 w-0 bg-yellow-400 group-hover:w-full transition-all duration-300"></div>
-
-              {/* Stars */}
-              <div className="flex gap-1 text-yellow-400 text-sm sm:text-base mb-4">
-                {[...Array(5)].map((_, index) => (
-                  <FaStar key={index} />
-                ))}
+              {/* Quote */}
+              <div className="absolute top-5 right-6 text-6xl font-bold text-yellow-100">
+                "
               </div>
 
-              {/* Review */}
-              <p className="text-gray-600 italic text-sm sm:text-base leading-6 sm:leading-7 flex-grow">
-                "{item.review}"
-              </p>
-
               {/* User */}
-              <div className="flex items-center gap-3 sm:gap-4 mt-6">
+              <div className="flex items-center gap-4 mb-6">
+
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full object-cover border-2 border-yellow-300 transition-transform duration-300 group-hover:scale-110"
+                  className="w-16 h-16 rounded-full border-4 border-yellow-300 object-cover"
                 />
 
                 <div>
-                  <h4 className="font-bold text-base sm:text-lg">
+                  <h3 className="font-bold text-lg">
                     {item.name}
-                  </h4>
+                  </h3>
 
-                  <p className="text-gray-500 text-sm">
+                  <p className="text-sm text-gray-500">
                     {item.role}
                   </p>
                 </div>
+
+              </div>
+
+              {/* Review */}
+              <p className="text-gray-600 leading-8 mb-8">
+                {item.review}
+              </p>
+
+              {/* Rating */}
+              <div className="flex text-yellow-400 gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <FaStar key={i} />
+                ))}
               </div>
             </div>
           ))}
 
         </div>
-
       </div>
     </section>
   );
