@@ -59,8 +59,12 @@ const Register = () => {
 
     createUser(email, password)
       .then(() => {
-        return updateUser(name);
-      })
+  const photoURL = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+    name
+  )}&background=F7DF1E&color=000`;
+
+  return updateUser(name, photoURL);
+})
       .then(() => {
         form.reset();
         navigate("/topics");
