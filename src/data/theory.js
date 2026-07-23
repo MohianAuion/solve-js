@@ -1,64 +1,115 @@
 const theory = {
-  variables: {
-    title: "Variables",
+  variables: createTheory(
+    "Variables",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types",
+    "https://www.w3schools.com/js/js_variables.asp",
+    "https://www.geeksforgeeks.org/javascript-variables/"
+  ),
 
-    introduction:
-      "Variables are containers used to store data. They allow us to save values and use them later in our programs.",
+  conditionals: createTheory(
+    "Conditionals",
+    "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Conditionals",
+    "https://www.w3schools.com/js/js_if_else.asp",
+    "https://www.geeksforgeeks.org/javascript-if-else-statement/"
+  ),
+
+  loops: createTheory(
+    "Loops",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration",
+    "https://www.w3schools.com/js/js_loop_for.asp",
+    "https://www.geeksforgeeks.org/javascript-loops/"
+  ),
+
+  arrays: createTheory(
+    "Arrays",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "https://www.w3schools.com/js/js_arrays.asp",
+    "https://www.geeksforgeeks.org/javascript-arrays/"
+  ),
+
+  strings: createTheory(
+    "Strings",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "https://www.w3schools.com/js/js_strings.asp",
+    "https://www.geeksforgeeks.org/javascript-strings/"
+  ),
+
+  objects: createTheory(
+    "Objects",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
+    "https://www.w3schools.com/js/js_objects.asp",
+    "https://www.geeksforgeeks.org/javascript-objects/"
+  ),
+
+  functions: createTheory(
+    "Functions",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions",
+    "https://www.w3schools.com/js/js_functions.asp",
+    "https://www.geeksforgeeks.org/javascript-functions/"
+  ),
+
+  combined: createTheory(
+    "Combined Practice",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+    "https://www.w3schools.com/js/",
+    "https://www.geeksforgeeks.org/javascript/"
+  ),
+};
+
+function createTheory(topic, mdn, w3schools, gfg) {
+  return {
+    title: topic,
+
+    description: `Welcome to the ${topic} lesson. This is demo content for SolveJS. Replace it with your complete lesson later.`,
+
+    resources: {
+      mdn,
+      w3schools,
+      gfg,
+    },
 
     sections: [
       {
-        heading: "What is a Variable?",
-        content:
-          "A variable is like a labeled box where you can store information such as numbers, text, or true/false values.",
+        heading: "📖 Introduction",
+        content: `This section introduces the basic concepts of ${topic}. Understanding this topic will help you build a strong JavaScript foundation.`,
       },
 
       {
-        heading: "Why do we use Variables?",
-        content:
-          "Variables help us store data so that we can reuse and update it whenever needed.",
+        heading: "🎯 Why Learn It?",
+        content: `${topic} is one of the most important JavaScript concepts. It is used in almost every JavaScript application.`,
       },
 
       {
-        heading: "let",
-        content:
-          "Use let when the value may change later.",
+        heading: "📝 Syntax",
+        code: `// Demo Syntax
+
+console.log("${topic}");
+`,
       },
 
       {
-        heading: "const",
-        content:
-          "Use const when the value should never change after it is assigned.",
+        heading: "💡 Example",
+        code: `// Demo Example
+
+function demo() {
+  console.log("Learning ${topic}");
+}
+
+demo();
+`,
       },
 
       {
-        heading: "var",
-        content:
-          "var is the old way of declaring variables. In modern JavaScript, prefer let and const.",
+        heading: "⚡ Common Mistakes",
+        content: `Beginners often make small mistakes while learning ${topic}. This section will contain those mistakes and how to avoid them.`,
       },
 
       {
-        heading: "Naming Rules",
-        content:
-          "Variable names can contain letters, numbers, _, and $. They cannot start with a number.",
-      },
-
-      {
-        heading: "Example",
-        code: `let name = "Auion";
-
-const age = 22;
-
-console.log(name);
-console.log(age);`,
-      },
-
-      {
-        heading: "Best Practices",
-        content:
-          "Use meaningful variable names. Prefer const whenever possible and use let only when values need to change.",
+        heading: "✅ Summary",
+        content: `Congratulations! You've completed the demo lesson for ${topic}. Replace this demo content with your real documentation whenever you're ready.`,
       },
     ],
-  },
-};
+  };
+}
 
 export default theory;

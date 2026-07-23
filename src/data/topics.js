@@ -1,12 +1,12 @@
 import {
-  FaCube,
-  FaCodeBranch,
-  FaRedo,
-  FaList,
   FaCode,
-  FaBoxOpen,
+  FaCodeBranch,
+  FaSyncAlt,
+  FaListUl,
   FaFont,
-  FaLayerGroup,
+  FaCube,
+  FaProjectDiagram,
+  FaLaptopCode,
 } from "react-icons/fa";
 
 const topics = [
@@ -14,96 +14,65 @@ const topics = [
     id: 1,
     slug: "variables",
     title: "Variables",
-    icon: FaCube,
+    icon: FaCode,
     description:
-      "Learn how to declare, store, and update values using JavaScript variables.",
-    totalProblems: 100,
-    color: "bg-yellow-100",
-    iconColor: "text-yellow-500",
+      "Learn how to declare, store, and update values using var, let, and const.",
   },
-
   {
     id: 2,
     slug: "conditionals",
     title: "Conditionals",
     icon: FaCodeBranch,
     description:
-      "Master decision making using if, else, switch, and logical operators.",
-    totalProblems: 100,
-    color: "bg-green-100",
-    iconColor: "text-green-500",
+      "Control the flow of your program using if, else, and switch statements.",
   },
-
   {
     id: 3,
     slug: "loops",
     title: "Loops",
-    icon: FaRedo,
+    icon: FaSyncAlt,
     description:
-      "Practice repeating tasks efficiently with JavaScript loops.",
-    totalProblems: 100,
-    color: "bg-blue-100",
-    iconColor: "text-blue-500",
+      "Execute code repeatedly using for, while, do...while, and for...of loops.",
   },
-
   {
     id: 4,
     slug: "arrays",
     title: "Arrays",
-    icon: FaList,
+    icon: FaListUl,
     description:
-      "Learn array methods, iteration, and common problem-solving patterns.",
-    totalProblems: 100,
-    color: "bg-pink-100",
-    iconColor: "text-pink-500",
+      "Store multiple values in a single variable and use useful array methods.",
   },
-
   {
     id: 5,
-    slug: "functions",
-    title: "Functions",
-    icon: FaCode,
-    description:
-      "Write reusable code with regular, arrow, and callback functions.",
-    totalProblems: 100,
-    color: "bg-purple-100",
-    iconColor: "text-purple-500",
-  },
-
-  {
-    id: 6,
-    slug: "objects",
-    title: "Objects",
-    icon: FaBoxOpen,
-    description:
-      "Understand objects, properties, methods, and nested structures.",
-    totalProblems: 100,
-    color: "bg-orange-100",
-    iconColor: "text-orange-500",
-  },
-
-  {
-    id: 7,
     slug: "strings",
     title: "Strings",
     icon: FaFont,
     description:
-      "Practice string methods, manipulation, and text processing.",
-    totalProblems: 100,
-    color: "bg-cyan-100",
-    iconColor: "text-cyan-500",
+      "Manipulate text using JavaScript string methods and template literals.",
   },
-
+  {
+    id: 6,
+    slug: "objects",
+    title: "Objects",
+    icon: FaCube,
+    description:
+      "Work with key-value pairs, nested objects, and object methods.",
+  },
+  {
+    id: 7,
+    slug: "functions",
+    title: "Functions",
+    icon: FaProjectDiagram,
+    description:
+      "Create reusable blocks of code using regular and arrow functions.",
+  },
   {
     id: 8,
-    slug: "all-in-one",
-    title: "All in One",
-    icon: FaLayerGroup,
+    slug: "combined",
+    title: "Combined Practice",
+    icon: FaLaptopCode,
     description:
-      "Challenge yourself with mixed JavaScript interview questions and coding problems.",
-    totalProblems: 300,
-    color: "bg-red-100",
-    iconColor: "text-red-500",
+      "Challenge yourself with mixed JavaScript questions and coding problems.",
   },
 ];
 
