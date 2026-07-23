@@ -3,12 +3,12 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthProvider";
 
 import {
-  FaGoogle,
   FaEye,
   FaEyeSlash,
   FaEnvelope,
   FaLock,
 } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   const {
@@ -194,7 +194,7 @@ const Login = () => {
           onClick={handleGoogleLogin}
           className="btn btn-outline w-full"
         >
-          <FaGoogle />
+          <FcGoogle className="text-xl"/>
           Continue with Google
         </button>
 

@@ -3,13 +3,13 @@ import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthProvider";
 
 import {
-  FaGoogle,
   FaEye,
   FaEyeSlash,
   FaUser,
   FaEnvelope,
   FaLock,
 } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
   const { createUser, googleLogin, updateUser } =
@@ -198,21 +198,21 @@ const Register = () => {
             </div>
           </div>
 
-          {/* Terms */}
-          <label className="flex items-start gap-3 cursor-pointer">
-            <input
-              type="checkbox"
-              name="terms"
-              className="checkbox checkbox-warning mt-1"
-            />
+         {/* Terms */}
+<label className="flex items-center gap-3 cursor-pointer">
+  <input
+    type="checkbox"
+    name="terms"
+    className="checkbox checkbox-warning checkbox-sm"
+  />
 
-            <span className="text-sm text-gray-600">
-              I agree to the{" "}
-              <span className="font-semibold text-yellow-600">
-                Terms & Conditions
-              </span>
-            </span>
-          </label>
+  <span className="text-sm text-gray-600">
+    I agree to the{" "}
+    <span className="font-semibold text-yellow-600">
+      Terms & Conditions
+    </span>
+  </span>
+</label>
 
           {/* Error */}
           {error && (
@@ -231,13 +231,13 @@ const Register = () => {
         <div className="divider my-6">OR</div>
 
         {/* Google */}
-        <button
-          onClick={handleGoogleRegister}
-          className="btn btn-outline w-full h-12 rounded-xl"
-        >
-          <FaGoogle className="text-red-500" />
-          Continue with Google
-        </button>
+      <button
+  onClick={handleGoogleRegister}
+  className="btn btn-outline w-full h-12 rounded-xl"
+>
+  <FcGoogle className="text-xl" />
+  Continue with Google
+</button>
 
         <p className="text-center mt-6 text-gray-600">
           Already have an account?{" "}

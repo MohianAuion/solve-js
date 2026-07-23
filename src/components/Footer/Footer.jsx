@@ -7,8 +7,6 @@ import {
   FaArrowUp,
 } from "react-icons/fa6";
 
-import logo from "../../assets/logo.png";
-
 const Footer = () => {
   const [showButton, setShowButton] = useState(false);
 
@@ -17,7 +15,6 @@ const Footer = () => {
       setShowButton(window.scrollY > 300);
     };
 
-    // Check once when component mounts
     handleScroll();
 
     window.addEventListener("scroll", handleScroll);
@@ -41,17 +38,11 @@ const Footer = () => {
 
           {/* Top */}
           <div className="flex flex-col items-center text-center">
-            <img
-              src={logo}
-              alt="SolveJS"
-              className="w-20 h-20 rounded-2xl shadow-lg border-2 border-[#F7DF1E]"
-            />
-
-            <h2 className="text-3xl font-bold mt-5">
-              SolveJS
+            <h2 className="text-3xl font-bold">
+              Solve<span className="text-[#F7DF1E]">JS</span>?
             </h2>
 
-            <p className="text-gray-400 mt-3 max-w-xl leading-8">
+            <p className="text-gray-400 mt-4 max-w-xl leading-8">
               Learn JavaScript by solving real coding challenges.
               Build logic, improve problem solving, and prepare for
               interviews — one topic at a time.
@@ -118,7 +109,7 @@ const Footer = () => {
                 </li>
 
                 <li className="hover:text-[#F7DF1E] cursor-pointer transition">
-                  Interview Q&A
+                  Interview Q&amp;A
                 </li>
 
                 <li className="hover:text-[#F7DF1E] cursor-pointer transition">
@@ -193,7 +184,6 @@ const Footer = () => {
 
           {/* Bottom */}
           <div className="border-t border-gray-700 mt-14 pt-6 flex flex-col md:flex-row items-center justify-between gap-5">
-
             <p className="text-gray-400 text-sm text-center">
               © {new Date().getFullYear()} SolveJS. All Rights Reserved.
             </p>
@@ -204,7 +194,6 @@ const Footer = () => {
                 Mohian Ahmed Auion
               </span>
             </p>
-
           </div>
         </div>
       </footer>
